@@ -29,9 +29,7 @@ namespace ClassDemoF26BoundedBufferLib.threadSafe
             _full.WaitOne();
             lock (_lockObj)
             {
-                
                 _buffer.Enqueue(item);
-                
             }
             _empty.Release();
         }
@@ -42,9 +40,7 @@ namespace ClassDemoF26BoundedBufferLib.threadSafe
             _empty.WaitOne();
             lock (_lockObj)
             {
-                
                 item = _buffer.Dequeue();
-                
             }
             _full.Release();
             return item;
