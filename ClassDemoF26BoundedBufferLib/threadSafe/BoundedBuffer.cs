@@ -26,23 +26,27 @@ namespace ClassDemoF26BoundedBufferLib.threadSafe
 
         public void Insert(T item)
         {
+            _full.WaitOne();
             lock (_lockObj)
             {
-                _full.WaitOne();
+                
                 _buffer.Enqueue(item);
-                _empty.Release();
+                
             }
+            _empty.Release();
         }
 
         public T Take()
         {
             T item;
+            _empty.WaitOne();
             lock (_lockObj)
             {
-                _empty.WaitOne();
+                
                 item = _buffer.Dequeue();
-                _full.Release();
+                
             }
+            _full.Release();
             return item;
 
         }

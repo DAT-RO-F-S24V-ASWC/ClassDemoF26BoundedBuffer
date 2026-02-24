@@ -13,7 +13,7 @@ namespace ClassDemoF26BoundedBufferApp
     internal class Eksperiment1
     {
         private const int MaxWait = 900;
-        private const int MaxValue = 12000;
+        private const int MaxValue = 1200;
         private const int NoProducers = 10;
         private const int NoConsumers = 5;
 
@@ -83,8 +83,7 @@ namespace ClassDemoF26BoundedBufferApp
             {
                 Thread.Sleep(100 + _rnd.Next(MaxWait));
                 Item item = new Item(_rnd.Next(MaxValue));
-                Console.WriteLine(item);
-
+                
                 buffer.Insert(item);
             }
         }
